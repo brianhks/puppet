@@ -10,6 +10,14 @@ ROLE_N_VERSION=$(curl -s $ROLE_SERVER/$1/role.txt)
 ROLE=$(echo $ROLE_N_VERSION | cut -f1,2 -d '_')
 VERSION=$(echo $ROLE_N_VERSION | cut -f1 -d '_v')
 
+#For puppet master
+#ROLE_PATH=$ENVIRONMENT_PATH/$ROLE_N_VERSION
+#For stand alone puppet
+ROLE_PATH=/etc/puppet
+
+MODULES_PATH=$ROLE_PATH/modules
+MANIFESTS_PATH=$ROLE_PATH/manifests
+
 CACHED_ROLE_FILE=$ROLE_CACHE/$ROLE-$VERSION.tar.gz
 
 #Fetch role from Nexus
@@ -27,18 +35,19 @@ fi
 
 #Extract role into environment
 #create/refresh environment folder
-rm -rf $ENVIRONMENT_PATH/$ROLE_N_VERSION
-mkdir $ENVIRONMENT_PATH/$ROLE_N_VERSION $ENVIRONMENT_PATH/$ROLE_N_VERSION/manifests $ENVIRONMENT_PATH/$ROLE_N_VERSION/modules 
+rm -rf $MODULES_PATH/*
+rm -rf $MANIFESTS_PATH/*
+mkdir $ROLE_PATH $MANIFESTS_PATH $MODULES_PATH 
 #create ${environment}/manifests/site.pp
 echo "
 node default {
 	notify { \"Message: What up\":}
 }
-" > $ENVIRONMENT_PATH/$ROLE_N_VERSION/manifests/site.pp
+" > $MANIFESTS_PATH/site.pp
 
 #create ${environment}/modules
 #extract role to ${environment}/modules
-tar -xf $CACHED_ROLE_FILE -C $ENVIRONMENT_PATH/$ROLE_N_VERSION/modules
+tar -xf $CACHED_ROLE_FILE -C $MODULES_PATH
 
 echo "---
 environment: $ROLE_N_VERSION
