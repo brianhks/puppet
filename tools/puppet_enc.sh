@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ROLE_CACHE=.
-ENVIRONMENT_PATH=./environment
+ROLE_CACHE=/etc/puppet/cache
+ENVIRONMENT_PATH=/etc/puppet/environments
 ROLE_SERVER=http://vm-server
 NEXUS_SERVER=http://vm-server:8081/nexus/content/repositories/puppet/agileclick
 
