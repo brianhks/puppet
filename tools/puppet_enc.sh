@@ -8,7 +8,7 @@ NEXUS_SERVER=http://vm-server:8081/nexus/content/repositories/puppet/agileclick
 #Collect puppet role from http server
 ROLE_N_VERSION=$(curl -s $ROLE_SERVER/$1/role.txt)
 ROLE=$(echo $ROLE_N_VERSION | cut -f1,2 -d '_')
-VERSION=$(echo $ROLE_N_VERSION | cut -f3 -d '_' | cut -f2 -d 'v')
+VERSION=$(echo $ROLE_N_VERSION | cut -f1 -d '_v')
 
 CACHED_ROLE_FILE=$ROLE_CACHE/$ROLE-$VERSION.tar.gz
 
