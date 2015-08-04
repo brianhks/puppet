@@ -31,7 +31,9 @@ rm -rf $ENVIRONMENT_PATH/$ROLE_N_VERSION
 mkdir $ENVIRONMENT_PATH/$ROLE_N_VERSION $ENVIRONMENT_PATH/$ROLE_N_VERSION/manifests $ENVIRONMENT_PATH/$ROLE_N_VERSION/modules 
 #create ${environment}/manifests/site.pp
 echo "
-include $baserole
+node default {
+	notify { \"Message: What up\":}
+}
 " > $ENVIRONMENT_PATH/$ROLE_N_VERSION/manifests/site.pp
 
 #create ${environment}/modules
@@ -42,7 +44,7 @@ echo "---
 parameters:
 environment: $ROLE_N_VERSION
 classes:
-#- $ROLE
+- $ROLE
 parameters:
   baserole: $ROLE
 "
