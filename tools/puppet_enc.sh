@@ -41,7 +41,6 @@ node default {
 tar -xf $CACHED_ROLE_FILE -C $ENVIRONMENT_PATH/$ROLE_N_VERSION/modules
 
 echo "---
-parameters:
 environment: $ROLE_N_VERSION
 classes:
 - $ROLE
