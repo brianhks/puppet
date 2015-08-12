@@ -11,9 +11,9 @@ ROLE=$(echo $ROLE_N_VERSION | cut -f1,2 -d '_')
 VERSION=$(echo $ROLE_N_VERSION | cut -f3 -d '_' | cut -f2 -d 'v')
 
 #For puppet master
-#ROLE_PATH=$ENVIRONMENT_PATH/$ROLE_N_VERSION
+ROLE_PATH=$ENVIRONMENT_PATH/$ROLE_N_VERSION
 #For stand alone puppet
-ROLE_PATH=/etc/puppet
+#ROLE_PATH=/etc/puppet
 
 MODULES_PATH=$ROLE_PATH/modules
 MANIFESTS_PATH=$ROLE_PATH/manifests
