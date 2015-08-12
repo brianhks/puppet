@@ -23,7 +23,9 @@ CACHED_ROLE_FILE=$ROLE_CACHE/$ROLE-$VERSION.tar.gz
 #Fetch role from Nexus
 if [ -f $CACHED_ROLE_FILE ]; then
 	#verify md5
-	REMOTE_MD5=$(curl -s $NEXUS_SERVER/$ROLE/$VERSION/$ROLE-$VERSION.tar.gz.md5)
+	MD5_URL=$NEXUS_SERVER/$ROLE/$VERSION/$ROLE-$VERSION.tar.gz.md5
+	echo $MD5_URL
+	REMOTE_MD5=$(curl -s $MD5_URL)
 	LOCAL_MD5=$(md5sum $CACHED_ROLE_FILE | cut -f1 -d ' ')
 	if [ ! $REMOTE_MD5 == $LOCAL_MD5 ]; then
 		echo "CRAPTASTIC, checksum failed!!"
