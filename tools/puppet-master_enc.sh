@@ -24,7 +24,7 @@ CACHED_ROLE_FILE=$ROLE_CACHE/$ROLE-$VERSION.tar.gz
 if [ -f $CACHED_ROLE_FILE ]; then
 	#verify md5
 	MD5_URL=$NEXUS_SERVER/$ROLE/$VERSION/$ROLE-$VERSION.tar.gz.md5
-	echo $MD5_URL
+	#echo $MD5_URL
 	REMOTE_MD5=$(curl -s $MD5_URL)
 	LOCAL_MD5=$(md5sum $CACHED_ROLE_FILE | cut -f1 -d ' ')
 	if [ ! $REMOTE_MD5 == $LOCAL_MD5 ]; then
@@ -37,8 +37,7 @@ fi
 
 #Extract role into environment
 #create/refresh environment folder
-rm -rf $MODULES_PATH/*
-rm -rf $MANIFESTS_PATH/*
+rm -rf $ROLE_PATH
 mkdir $ROLE_PATH $MANIFESTS_PATH $MODULES_PATH 
 #create ${environment}/manifests/site.pp
 echo "
