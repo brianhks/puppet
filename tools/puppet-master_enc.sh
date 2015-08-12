@@ -9,7 +9,7 @@ NEXUS_SERVER=http://nexus:8081/nexus/content/repositories/puppet/agileclick
 ROLE_N_VERSION=$(curl -s $ROLE_SERVER/$1/role.txt)
 ROLE=$(echo $ROLE_N_VERSION | cut -f1,2 -d '_')
 VERSION=$(echo $ROLE_N_VERSION | cut -f3 -d '_' | cut -f2 -d 'v')
-MOD_ROLE_N_VERSION=${ROLE_N_VERSION/\./_}
+MOD_ROLE_N_VERSION=${ROLE_N_VERSION//\./_}
 
 #For puppet master
 ROLE_PATH=$ENVIRONMENT_PATH/$MOD_ROLE_N_VERSION
